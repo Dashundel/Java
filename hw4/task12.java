@@ -22,37 +22,42 @@ public class task12 {
   
     static boolean checkBrackets(String exp)
     {
-        Deque<Character> deque= new ArrayDeque<Character>();
+        Deque<Character> deque = new ArrayDeque<Character>();
 
         for (int i = 0; i < exp.length(); i++){
             char x = exp.charAt(i);
-  
-            if (x == '(' || x == '[' || x == '{') {
+            if (x == '(' || x == '[' || x == '{'|| x == '<') {
                 deque.push(x);
             }
-
-            if (deque.isEmpty()) return false;
-
+            
+            //if (deque.isEmpty()) return false;
             char check;
             switch (x) {
                 case ')':
                     check = deque.pop();
-                    if (check == '{' || check == '[')
+                    if (check == '{' || check == '['|| check == '<')
                         return false;
                     break;
     
                 case '}':
                     check = deque.pop();
-                    if (check == '(' || check == '[')
+                    if (check == '(' || check == '['|| check == '<')
                         return false;
                     break;
     
                 case ']':
                     check = deque.pop();
-                    if (check == '(' || check == '{')
+                    if (check == '(' || check == '{'|| check == '<')
                         return false;
                     break;
+                    
+                case '>':
+                    check = deque.pop();
+                    if (check == '(' || check == '{'|| check == '[')
+                        return false;
+                    break;    
             }
+
         }
         return (deque.isEmpty());
     }
